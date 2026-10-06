@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Exam Performance Predictor</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 55%, #7c3aed 100%);
+      color: #1f2937;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      overflow: hidden;
+    }
+
+    /* Floating math symbols */
+    .math { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .math span {
+      position: absolute;
+      font-family: "Cambria Math", "Times New Roman", serif;
+      color: rgba(255, 255, 255, .14);
+      font-weight: 600;
+      animation: drift 14s ease-in-out infinite;
+      user-select: none;
+    }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+      50% { transform: translateY(-28px) rotate(calc(var(--r, 0deg) + 12deg)); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      background: rgba(255, 255, 255, .96);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+      padding: 44px 32px;
+      text-align: center;
+    }
+    .badge { font-size: 2.8rem; line-height: 1; margin-bottom: 12px; }
+    h1 { margin: 0 0 12px; font-size: 1.75rem; color: #312e81; }
+    p { margin: 0 0 28px; color: #6b7280; line-height: 1.6; }
+    a.button {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, .4);
+      transition: transform .15s, box-shadow .15s;
+    }
+    a.button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(79, 70, 229, .5); }
+
+    @media (prefers-reduced-motion: reduce) { .math span { animation: none; } }
+  </style>
+</head>
+<body>
+  <div class="math" aria-hidden="true">
+    <span style="top:6%;  left:8%;  font-size:4rem;   --r:-10deg; animation-delay:0s">∑</span>
+    <span style="top:14%; left:72%; font-size:3.2rem; --r:12deg;  animation-delay:-3s">π</span>
+    <span style="top:30%; left:88%; font-size:4.5rem; --r:-8deg;  animation-delay:-6s">∫</span>
+    <span style="top:42%; left:4%;  font-size:3.5rem; --r:8deg;   animation-delay:-2s">√</span>
+    <span style="top:58%; left:80%; font-size:3rem;   --r:-14deg; animation-delay:-8s">∞</span>
+    <span style="top:72%; left:12%; font-size:4rem;   --r:10deg;  animation-delay:-5s">÷</span>
+    <span style="top:84%; left:60%; font-size:3.4rem; --r:-6deg;  animation-delay:-9s">±</span>
+    <span style="top:8%;  left:40%; font-size:2.6rem; --r:6deg;   animation-delay:-4s">+</span>
+    <span style="top:90%; left:30%; font-size:3rem;   --r:-12deg; animation-delay:-7s">×</span>
+    <span style="top:50%; left:92%; font-size:2.4rem; --r:5deg;   animation-delay:-1s">=</span>
+    <span style="top:24%; left:22%; font-size:2.8rem; --r:-5deg;  animation-delay:-10s">θ</span>
+    <span style="top:66%; left:44%; font-size:2.6rem; --r:9deg;   animation-delay:-11s">≈</span>
+    <span style="top:36%; left:56%; font-size:2.2rem; --r:-9deg;  animation-delay:-12s">Δ</span>
+    <span style="top:80%; left:90%; font-size:3.6rem; --r:7deg;   animation-delay:-13s">%</span>
+    <span style="top:4%;  left:92%; font-size:2.4rem; --r:-4deg;  animation-delay:-14s">x²</span>
+    <span style="top:92%; left:4%;  font-size:2.4rem; --r:4deg;   animation-delay:-2.5s">≥</span>
+  </div>
+
+  <main class="card">
+    <div class="badge">🎓</div>
+    <h1>Student Exam Performance Predictor</h1>
+    <p>Enter a student's background and reading and writing scores, and the model will predict their math score.</p>
+    <a class="button" href="{{ url_for('predict_datapoint') }}">Start Prediction</a>
+  </main>
+</body>
+</html>
